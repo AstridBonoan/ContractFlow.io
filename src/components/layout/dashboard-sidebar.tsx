@@ -7,13 +7,17 @@ import {
   FileText,
   Hammer,
   LayoutDashboard,
+  LogOut,
   Menu,
   Settings,
   Users,
   X,
 } from "lucide-react";
 import { useState } from "react";
+import { useRouter } from "next/navigation";
 import { cn, withBasePath } from "@/lib/utils";
+import { useAuth } from "@/components/providers/auth-provider";
+import { Button } from "@/components/ui/button";
 const navItems = [
   { href: "/dashboard/", label: "Dashboard", icon: LayoutDashboard },
   { href: "/dashboard/leads/", label: "Leads", icon: Users },
@@ -25,7 +29,14 @@ const navItems = [
 
 export function DashboardSidebar() {
   const pathname = usePathname();
+  const router = useRouter();
+  const { user, signOut } = useAuth();
   const [open, setOpen] = useState(false);
+
+  const handleSignOut = async () => {
+    await signOut();
+    router.replace(withBasePath("/auth/login/"));
+  };
 
   const normalizedPath = pathname?.replace(/\/$/, "") || "";
 
@@ -80,8 +91,23 @@ export function DashboardSidebar() {
             );
           })}
         </nav>
-        <div className="absolute bottom-4 left-4 right-4 rounded-lg bg-slate-800 p-3">
-          <Link href={withBasePath("/")} className="text-xs text-slate-400 hover:text-white">
+        <div className="absolute bottom-4 left-4 right-4 space-y-3 rounded-lg bg-slate-800 p-3">
+          {user && (
+            <div className="border-b border-slate-700 pb-3">
+              <p className="truncate text-sm font-medium text-white">{user.fullName}</p>
+              <p className="truncate text-xs text-slate-400">{user.email}</p>
+            </div>
+          )}
+          <Button
+            variant="ghost"
+            size="sm"
+            className="w-full justify-start text-slate-300 hover:bg-slate-700 hover:text-white"
+            onClick={handleSignOut}
+          >
+            <LogOut className="h-4 w-4" />
+            Sign Out
+          </Button>
+          <Link href={withBasePath("/")} className="block text-xs text-slate-400 hover:text-white">
             ← Public Portal
           </Link>
         </div>

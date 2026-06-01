@@ -23,7 +23,7 @@ export function SiteHeader() {
             Request Estimate
           </Link>
           <Button asChild size="sm" variant="secondary">
-            <Link href={withBasePath("/dashboard/")}>Contractor Login</Link>
+            <Link href={withBasePath("/auth/login/")}>Contractor Login</Link>
           </Button>
         </nav>
       </div>

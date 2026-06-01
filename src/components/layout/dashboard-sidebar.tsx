@@ -14,8 +14,6 @@ import {
 } from "lucide-react";
 import { useState } from "react";
 import { cn, withBasePath } from "@/lib/utils";
-import { ThemeToggle } from "@/components/layout/theme-toggle";
-
 const navItems = [
   { href: "/dashboard/", label: "Dashboard", icon: LayoutDashboard },
   { href: "/dashboard/leads/", label: "Leads", icon: Users },
@@ -82,11 +80,10 @@ export function DashboardSidebar() {
             );
           })}
         </nav>
-        <div className="absolute bottom-4 left-4 right-4 flex items-center justify-between rounded-lg bg-slate-800 p-3">
+        <div className="absolute bottom-4 left-4 right-4 rounded-lg bg-slate-800 p-3">
           <Link href={withBasePath("/")} className="text-xs text-slate-400 hover:text-white">
             ← Public Portal
           </Link>
-          <ThemeToggle />
         </div>
       </aside>
       {open && (

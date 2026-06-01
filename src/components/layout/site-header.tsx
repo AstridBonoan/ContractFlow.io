@@ -2,7 +2,6 @@
 
 import Link from "next/link";
 import { Hammer } from "lucide-react";
-import { ThemeToggle } from "@/components/layout/theme-toggle";
 import { Button } from "@/components/ui/button";
 import { withBasePath } from "@/lib/utils";
 
@@ -23,7 +22,6 @@ export function SiteHeader() {
           >
             Request Estimate
           </Link>
-          <ThemeToggle />
           <Button asChild size="sm" variant="secondary">
             <Link href={withBasePath("/dashboard/")}>Contractor Login</Link>
           </Button>

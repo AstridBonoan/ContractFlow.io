@@ -16,7 +16,7 @@ import {
   SelectValue,
 } from "@/components/ui/select";
 import { LEAD_STATUSES } from "@/lib/constants";
-import { dataStore } from "@/lib/store";
+import { addLeadNote, updateLeadStatus } from "@/lib/data-service";
 import { useAppData } from "@/components/providers/data-provider";
 import { withBasePath } from "@/lib/utils";
 import type { Lead } from "@/types";
@@ -27,16 +27,16 @@ export function LeadDetail({ lead }: { lead: Lead }) {
   const [note, setNote] = useState("");
   const notes = data.notes.filter((n) => n.lead_id === lead.id);
 
-  const updateStatus = (status: LeadStatus) => {
-    dataStore.updateLeadStatus(lead.id, status);
-    refresh();
+  const updateStatus = async (status: LeadStatus) => {
+    await updateLeadStatus(lead.id, status);
+    await refresh();
   };
 
-  const addNote = () => {
+  const addNote = async () => {
     if (!note.trim()) return;
-    dataStore.addLeadNote(lead.id, note);
+    await addLeadNote(lead.id, note);
     setNote("");
-    refresh();
+    await refresh();
   };
 
   const customer = lead.customer;

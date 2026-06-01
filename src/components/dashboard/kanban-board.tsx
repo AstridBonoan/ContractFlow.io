@@ -4,7 +4,7 @@ import Link from "next/link";
 import { Badge, statusToBadgeVariant } from "@/components/ui/badge";
 import { withBasePath } from "@/lib/utils";
 import type { Lead } from "@/types";
-import { dataStore } from "@/lib/store";
+import { updateLeadStatus } from "@/lib/data-service";
 import { useAppData } from "@/components/providers/data-provider";
 import type { LeadStatus } from "@/lib/constants";
 
@@ -21,9 +21,9 @@ const pipelineStatuses: LeadStatus[] = [
 export function KanbanBoard({ leads }: { leads: Lead[] }) {
   const { refresh } = useAppData();
 
-  const onDrop = (leadId: string, status: LeadStatus) => {
-    dataStore.updateLeadStatus(leadId, status);
-    refresh();
+  const onDrop = async (leadId: string, status: LeadStatus) => {
+    await updateLeadStatus(leadId, status);
+    await refresh();
   };
 
   return (

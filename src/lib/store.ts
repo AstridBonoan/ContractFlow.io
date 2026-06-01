@@ -66,11 +66,11 @@ export const dataStore = {
     };
 
     const leadId = uid("lead");
-    const photos = input.photos.map((_, i) => ({
+    const photos = input.photos.map((file, i) => ({
       id: uid("photo"),
       lead_id: leadId,
       storage_path: `local/${leadId}/${i}`,
-      url: URL.createObjectURL(input.photos[i]),
+      url: file.type.startsWith("image/") ? URL.createObjectURL(file) : "",
       created_at: new Date().toISOString(),
     }));
 

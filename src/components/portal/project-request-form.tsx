@@ -20,9 +20,9 @@ import {
 } from "@/components/ui/select";
 import { PhotoUploader } from "@/components/portal/photo-uploader";
 import { BUDGET_RANGES, SERVICE_TYPES, TIMELINES } from "@/lib/constants";
-import { dataStore } from "@/lib/store";
+import { submitProjectRequest } from "@/lib/data-service";
 import { useAppData } from "@/components/providers/data-provider";
-import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
+import { isSupabaseConfigured } from "@/lib/supabase/client";
 
 const schema = z.object({
   full_name: z.string().min(2, "Name is required"),
@@ -44,6 +44,7 @@ export function ProjectRequestForm() {
   const [photos, setPhotos] = useState<File[]>([]);
   const [submitted, setSubmitted] = useState(false);
   const [submitting, setSubmitting] = useState(false);
+  const [error, setError] = useState<string | null>(null);
 
   const {
     register,
@@ -60,52 +61,16 @@ export function ProjectRequestForm() {
 
   const onSubmit = async (values: FormValues) => {
     setSubmitting(true);
+    setError(null);
     try {
-      if (isSupabaseConfigured()) {
-        const supabase = getSupabaseClient()!;
-        const { data: customer, error: custErr } = await supabase
-          .from("customers")
-          .insert({
-            full_name: values.full_name,
-            email: values.email,
-            phone: values.phone,
-            address: values.address,
-          })
-          .select()
-          .single();
-        if (custErr) throw custErr;
-
-        const { data: lead, error: leadErr } = await supabase
-          .from("leads")
-          .insert({
-            customer_id: customer.id,
-            service_type: values.service_type,
-            description: values.description,
-            budget_range: values.budget_range,
-            timeline: values.timeline,
-            consultation_date: values.consultation_date || null,
-            consultation_time: values.consultation_time || null,
-            priority_score: 50,
-          })
-          .select()
-          .single();
-        if (leadErr) throw leadErr;
-
-        for (const file of photos) {
-          const path = `${lead.id}/${Date.now()}-${file.name}`;
-          await supabase.storage.from("lead-photos").upload(path, file);
-          await supabase.from("lead_photos").insert({ lead_id: lead.id, storage_path: path });
-        }
-      } else {
-        dataStore.submitProjectRequest({ ...values, photos });
-      }
-      refresh();
+      await submitProjectRequest({ ...values, photos });
+      await refresh();
       setSubmitted(true);
     } catch (err) {
       console.error(err);
-      dataStore.submitProjectRequest({ ...values, photos });
-      refresh();
-      setSubmitted(true);
+      setError(
+        err instanceof Error ? err.message : "Something went wrong. Please try again."
+      );
     } finally {
       setSubmitting(false);
     }
@@ -127,6 +92,12 @@ export function ProjectRequestForm() {
             <p className="mt-2 text-slate-600 dark:text-slate-400">
               A contractor will review your project and contact you shortly.
             </p>
+            {!isSupabaseConfigured() && (
+              <p className="mt-3 rounded-lg bg-slate-100 px-3 py-2 text-xs text-slate-600 dark:bg-slate-800 dark:text-slate-400">
+                Your request is saved in this browser. Open the contractor dashboard here (same
+                device/browser) to see it appear under Leads.
+              </p>
+            )}
             <Button className="mt-6" onClick={() => setSubmitted(false)}>
               Submit Another Request
             </Button>
@@ -152,6 +123,11 @@ export function ProjectRequestForm() {
             </CardDescription>
           </CardHeader>
           <CardContent>
+            {error && (
+              <p className="mb-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-900/30 dark:text-red-300" role="alert">
+                {error}
+              </p>
+            )}
             <form onSubmit={handleSubmit(onSubmit)} className="space-y-8">
               <fieldset className="space-y-4">
                 <legend className="text-sm font-semibold uppercase tracking-wide text-amber-700 dark:text-amber-500">

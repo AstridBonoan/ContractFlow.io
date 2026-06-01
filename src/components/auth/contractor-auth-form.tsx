@@ -14,6 +14,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useAuth } from "@/components/providers/auth-provider";
 import { withBasePath } from "@/lib/utils";
+import { DEMO_EMAIL, DEMO_PASSWORD } from "@/lib/auth-store";
 import { isSupabaseConfigured } from "@/lib/supabase/client";
 
 const signInSchema = z.object({
@@ -46,7 +47,7 @@ export function ContractorAuthForm() {
 
   const signInForm = useForm<SignInValues>({
     resolver: zodResolver(signInSchema),
-    defaultValues: { email: "", password: "" },
+    defaultValues: { email: DEMO_EMAIL, password: DEMO_PASSWORD },
   });
 
   const signUpForm = useForm<SignUpValues>({
@@ -94,7 +95,7 @@ export function ContractorAuthForm() {
       <CardContent>
         {!isSupabaseConfigured() && (
           <p className="mb-4 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-900 dark:bg-amber-900/30 dark:text-amber-200">
-            Demo mode: use <strong>contractor@demo.com</strong> / <strong>demo1234</strong> or create
+            Demo mode: use <strong>{DEMO_EMAIL}</strong> / <strong>{DEMO_PASSWORD}</strong> or create
             a new account.
           </p>
         )}

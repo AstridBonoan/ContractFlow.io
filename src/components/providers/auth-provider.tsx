@@ -9,6 +9,7 @@ import {
   getSession,
   setSession,
   type AuthUser,
+  initAuthStore,
 } from "@/lib/auth-store";
 import { getSupabaseClient, isSupabaseConfigured } from "@/lib/supabase/client";
 
@@ -62,6 +63,7 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
         });
         unsubscribe = () => listener.subscription.unsubscribe();
       } else {
+        initAuthStore();
         syncUser(getSession());
       }
       setLoading(false);
@@ -74,8 +76,13 @@ export function AuthProvider({ children }: { children: React.ReactNode }) {
   const signIn = useCallback(async (email: string, password: string) => {
     if (isSupabaseConfigured()) {
       const supabase = getSupabaseClient()!;
-      const { data, error } = await supabase.auth.signInWithPassword({ email, password });
-      if (error) throw new Error(error.message);
+      const { data, error } = await supabase.auth.signInWithPassword({
+        email: email.trim(),
+        password: password.trim(),
+      });
+      if (error) {
+        throw new Error(error.message);
+      }
       if (data.user) syncUser(mapSupabaseUser(data.user));
       return;
     }

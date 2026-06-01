@@ -5,15 +5,15 @@ export function cn(...inputs: ClassValue[]) {
   return twMerge(clsx(inputs));
 }
 
-export function getBasePath(): string {
-  return process.env.NEXT_PUBLIC_BASE_PATH ?? "";
-}
-
+/** App route path. Next.js `basePath` in next.config prepends this on deploy — do not add it again in Link/router hrefs. */
 export function withBasePath(path: string): string {
-  const base = getBasePath();
-  if (!base) return path;
   const normalized = path.startsWith("/") ? path : `/${path}`;
-  return `${base}${normalized}`;
+  // Strip accidental duplicate base segment (e.g. /ContractFlow.io/ContractFlow.io/...)
+  const base = process.env.NEXT_PUBLIC_BASE_PATH ?? "";
+  if (base && normalized.startsWith(`${base}${base}`)) {
+    return normalized.slice(base.length);
+  }
+  return normalized;
 }
 
 export function formatCurrency(amount: number): string {

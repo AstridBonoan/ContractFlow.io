@@ -1,6 +1,7 @@
 "use client";
 
 import { CalendarView } from "@/components/dashboard/calendar-view";
+import { PageHeader } from "@/components/dashboard/page-header";
 import { useAppData } from "@/components/providers/data-provider";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -10,11 +11,11 @@ export default function CalendarPage() {
   if (loading) return <Skeleton className="h-96 w-full" />;
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Calendar</h1>
-        <p className="text-slate-500">Consultations, follow-ups, and estimate meetings</p>
-      </div>
+    <div className="mx-auto max-w-6xl space-y-5">
+      <PageHeader
+        title="Calendar"
+        description="Consultations, follow-ups, and estimate meetings"
+      />
       <CalendarView appointments={data.appointments} />
     </div>
   );

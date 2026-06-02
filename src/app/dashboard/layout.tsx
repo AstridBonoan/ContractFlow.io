@@ -13,7 +13,7 @@ export default function DashboardLayout({
       <div className="min-h-screen bg-slate-100">
         <DashboardSidebar />
         <main className="lg:pl-64">
-          <div className="min-h-screen p-4 pt-16 lg:p-8 lg:pt-8">{children}</div>
+          <div className="min-h-screen px-4 pb-8 pt-[4.5rem] lg:p-8 lg:pt-8">{children}</div>
         </main>
       </div>
     </AuthGuard>

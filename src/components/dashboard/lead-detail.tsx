@@ -60,7 +60,7 @@ export function LeadDetail({ lead }: { lead: Lead }) {
               <CardTitle>Project Description</CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-slate-700 dark:text-slate-300">{lead.description}</p>
+              <p className="text-slate-700">{lead.description}</p>
               <div className="mt-4 flex flex-wrap gap-4 text-sm text-slate-500">
                 <span>Budget: {lead.budget_range}</span>
                 <span>Timeline: {lead.timeline}</span>
@@ -99,7 +99,7 @@ export function LeadDetail({ lead }: { lead: Lead }) {
             </CardHeader>
             <CardContent className="space-y-4">
               {notes.map((n) => (
-                <div key={n.id} className="rounded-lg bg-slate-50 p-3 dark:bg-slate-800">
+                <div key={n.id} className="rounded-lg border border-slate-200 bg-slate-50 p-3">
                   <p className="text-sm">{n.content}</p>
                   <p className="mt-1 text-xs text-slate-400">{formatDate(n.created_at)}</p>
                 </div>

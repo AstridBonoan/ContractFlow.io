@@ -121,7 +121,7 @@ export function CalendarView({ appointments }: { appointments: Appointment[] }) 
                   {events.map((e) => (
                     <div
                       key={e.id}
-                      className="truncate rounded bg-amber-100 px-1 py-0.5 text-[10px] text-amber-900 dark:bg-amber-900/40 dark:text-amber-200"
+                      className="truncate rounded bg-amber-100 px-1 py-0.5 text-[10px] font-medium text-amber-900"
                     >
                       {format(new Date(e.start_at), "h:mm a")} {e.title}
                     </div>

@@ -26,12 +26,9 @@ export function ConsultationsWidget({ appointments }: { appointments: Appointmen
           <p className="text-sm text-slate-500">No upcoming consultations scheduled.</p>
         ) : (
           upcoming.map((apt) => (
-            <div
-              key={apt.id}
-              className="rounded-lg border border-slate-100 p-3 dark:border-slate-800"
-            >
-              <p className="font-medium text-slate-900 dark:text-white">{apt.title}</p>
-              <p className="text-sm text-amber-700 dark:text-amber-500">
+            <div key={apt.id} className="rounded-lg border border-slate-200 bg-slate-50 p-3">
+              <p className="font-medium text-slate-900">{apt.title}</p>
+              <p className="text-sm font-medium text-amber-700">
                 {format(new Date(apt.start_at), "EEE, MMM d · h:mm a")}
               </p>
             </div>

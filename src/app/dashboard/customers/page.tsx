@@ -5,6 +5,7 @@ import { Users } from "lucide-react";
 import { useAppData } from "@/components/providers/data-provider";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { EmptyState } from "@/components/dashboard/empty-state";
+import { PageHeader } from "@/components/dashboard/page-header";
 import { formatDate, withBasePath } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
 
@@ -14,11 +15,8 @@ export default function CustomersPage() {
   if (loading) return <Skeleton className="h-96 w-full" />;
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Customers</h1>
-        <p className="text-slate-500">Customer records and project history</p>
-      </div>
+    <div className="mx-auto max-w-6xl space-y-5">
+      <PageHeader title="Customers" description="Customer records and project history" />
       {data.customers.length === 0 ? (
         <EmptyState
           icon={Users}
@@ -38,9 +36,9 @@ export default function CustomersPage() {
                 <CardContent className="space-y-3 text-sm">
                   <p className="text-slate-500">{customer.email}</p>
                   <p>{customer.phone}</p>
-                  <p className="text-slate-600 dark:text-slate-400">{customer.address}</p>
+                  <p className="text-slate-600">{customer.address}</p>
                   {customer.notes && (
-                    <p className="rounded-lg bg-slate-50 p-2 italic dark:bg-slate-800">
+                    <p className="rounded-lg bg-slate-50 p-2 italic text-slate-700">
                       {customer.notes}
                     </p>
                   )}

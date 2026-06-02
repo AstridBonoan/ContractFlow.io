@@ -33,7 +33,7 @@ export function KanbanBoard({ leads }: { leads: Lead[] }) {
         return (
           <div
             key={status}
-            className="min-w-[240px] flex-shrink-0 rounded-xl bg-slate-100 p-3 dark:bg-slate-900"
+            className="min-w-[260px] flex-shrink-0 rounded-xl bg-slate-200/80 p-3"
             onDragOver={(e) => e.preventDefault()}
             onDrop={(e) => {
               const leadId = e.dataTransfer.getData("leadId");
@@ -50,7 +50,7 @@ export function KanbanBoard({ leads }: { leads: Lead[] }) {
                   key={lead.id}
                   draggable
                   onDragStart={(e) => e.dataTransfer.setData("leadId", lead.id)}
-                  className="cursor-grab rounded-lg border bg-white p-3 shadow-sm active:cursor-grabbing dark:bg-slate-800"
+                  className="cursor-grab rounded-lg border border-slate-200 bg-white p-3 shadow-sm active:cursor-grabbing"
                 >
                   <Link href={withBasePath(`/dashboard/leads/?id=${lead.id}`)}>
                     <p className="font-medium text-sm">{lead.customer?.full_name}</p>

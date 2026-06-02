@@ -52,13 +52,13 @@ function LeadsContent() {
   }
 
   return (
-    <div className="space-y-6">
-      <div className="flex flex-wrap items-center justify-between gap-4">
+    <div className="mx-auto max-w-6xl space-y-5">
+      <div className="mb-5 flex flex-wrap items-start justify-between gap-3">
         <div>
-          <h1 className="text-2xl font-bold">Leads</h1>
-          <p className="text-slate-500">{filtered.length} leads</p>
+          <h1 className="text-2xl font-bold text-slate-900 sm:text-3xl">Leads</h1>
+          <p className="mt-1 text-sm text-slate-600">{filtered.length} leads in your pipeline</p>
         </div>
-        <div className="flex gap-2">
+        <div className="flex shrink-0 gap-2">
           <Button
             variant={view === "list" ? "default" : "outline"}
             size="icon"
@@ -78,18 +78,18 @@ function LeadsContent() {
         </div>
       </div>
 
-      <div className="flex flex-wrap gap-4">
-        <div className="relative min-w-[200px] flex-1">
-          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
+      <div className="flex flex-col gap-3 sm:flex-row">
+        <div className="relative flex-1">
+          <Search className="absolute left-3 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-500" />
           <Input
-            className="pl-9"
+            className="h-11 pl-9"
             placeholder="Search leads..."
             value={search}
             onChange={(e) => setSearch(e.target.value)}
           />
         </div>
         <Select value={statusFilter} onValueChange={setStatusFilter}>
-          <SelectTrigger className="w-[200px]">
+          <SelectTrigger className="h-11 w-full sm:w-[200px]">
             <SelectValue placeholder="Filter status" />
           </SelectTrigger>
           <SelectContent>
@@ -112,7 +112,7 @@ function LeadsContent() {
       ) : view === "kanban" ? (
         <KanbanBoard leads={filtered} />
       ) : (
-        <div className="grid gap-4 sm:grid-cols-2 xl:grid-cols-3">
+        <div className="grid gap-3 sm:grid-cols-2 xl:grid-cols-3">
           {filtered.map((lead) => (
             <LeadCard key={lead.id} lead={lead} />
           ))}

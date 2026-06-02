@@ -32,7 +32,7 @@ export function FunnelChart({ leads }: { leads: Lead[] }) {
         <div className="h-[280px] w-full">
           <ResponsiveContainer width="100%" height="100%">
             <BarChart data={data} layout="vertical" margin={{ left: 20 }}>
-              <CartesianGrid strokeDasharray="3 3" className="stroke-slate-200 dark:stroke-slate-700" />
+              <CartesianGrid strokeDasharray="3 3" stroke="#e2e8f0" />
               <XAxis type="number" />
               <YAxis dataKey="stage" type="category" width={90} tick={{ fontSize: 11 }} />
               <Tooltip />

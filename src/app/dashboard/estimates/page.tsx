@@ -11,6 +11,7 @@ import { Badge, statusToBadgeVariant } from "@/components/ui/badge";
 import { Card, CardContent } from "@/components/ui/card";
 import { formatCurrency, formatDate, withBasePath } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
+import { PageHeader } from "@/components/dashboard/page-header";
 
 function EstimatesContent() {
   const { data, loading } = useAppData();
@@ -34,11 +35,8 @@ function EstimatesContent() {
   }
 
   return (
-    <div className="space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Estimates</h1>
-        <p className="text-slate-500">Manage and send project estimates</p>
-      </div>
+    <div className="mx-auto max-w-6xl space-y-5">
+      <PageHeader title="Estimates" description="Manage and send project estimates" />
       {data.estimates.length === 0 ? (
         <EmptyState
           icon={FileText}

@@ -15,7 +15,7 @@ export function LeadCard({ lead }: { lead: Lead }) {
         <CardContent className="p-4">
           <div className="flex items-start justify-between gap-2">
             <div>
-              <h3 className="font-semibold text-slate-900 dark:text-white">
+              <h3 className="font-semibold text-slate-900">
                 {customer?.full_name ?? "Unknown"}
               </h3>
               <p className="text-sm text-slate-500">{lead.service_type}</p>

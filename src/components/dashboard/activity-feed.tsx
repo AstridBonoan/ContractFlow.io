@@ -25,12 +25,12 @@ export function ActivityFeed({ activities }: { activities: ActivityItem[] }) {
           activities.map((item) => {
             const Icon = icons[item.type];
             return (
-              <div key={item.id} className="flex gap-3 border-b border-slate-100 pb-4 last:border-0 dark:border-slate-800">
-                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-700 dark:bg-amber-900/30">
+              <div key={item.id} className="flex gap-3 border-b border-slate-200 pb-4 last:border-0">
+                <div className="flex h-9 w-9 shrink-0 items-center justify-center rounded-full bg-amber-100 text-amber-700">
                   <Icon className="h-4 w-4" />
                 </div>
                 <div className="min-w-0 flex-1">
-                  <p className="text-sm font-medium text-slate-900 dark:text-white">{item.title}</p>
+                  <p className="text-sm font-medium text-slate-900">{item.title}</p>
                   <p className="text-sm text-slate-500">{item.description}</p>
                   <p className="mt-1 text-xs text-slate-400">
                     {formatDistanceToNow(new Date(item.timestamp), { addSuffix: true })}

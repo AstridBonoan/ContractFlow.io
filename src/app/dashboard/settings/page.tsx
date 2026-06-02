@@ -10,6 +10,7 @@ import { Textarea } from "@/components/ui/textarea";
 import { Switch } from "@/components/ui/switch";
 import { Button } from "@/components/ui/button";
 import { Skeleton } from "@/components/ui/skeleton";
+import { PageHeader } from "@/components/dashboard/page-header";
 
 export default function SettingsPage() {
   const { data, refresh, loading } = useAppData();
@@ -27,12 +28,12 @@ export default function SettingsPage() {
 
   return (
     <div className="mx-auto max-w-2xl space-y-6">
-      <div>
-        <h1 className="text-2xl font-bold">Settings</h1>
-        <p className="text-slate-500">Customize your contractor profile and estimates</p>
-      </div>
+      <PageHeader
+        title="Settings"
+        description="Customize your contractor profile and estimates"
+      />
 
-      <Card>
+      <Card className="border-slate-200 bg-white">
         <CardHeader>
           <CardTitle>Company Profile</CardTitle>
           <CardDescription>Branding shown on estimates and PDF exports</CardDescription>

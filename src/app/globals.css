@@ -25,6 +25,18 @@ html {
   color: #0f172a;
 }
 
+/* Override if iOS/Safari still adds .dark */
+html.dark {
+  color-scheme: light only;
+  --background: #f8fafc;
+  --foreground: #0f172a;
+}
+
+html.dark body {
+  background-color: #f8fafc !important;
+  color: #0f172a !important;
+}
+
 body {
   background-color: #f8fafc;
   color: #0f172a;

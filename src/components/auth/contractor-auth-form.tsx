@@ -81,27 +81,27 @@ export function ContractorAuthForm() {
   };
 
   return (
-    <Card className="w-full max-w-md border-slate-200 shadow-xl dark:border-slate-800">
+    <Card className="w-full max-w-md border-slate-200 bg-white shadow-xl">
       <CardHeader className="text-center">
         <Link href={withBasePath("/")} className="mx-auto mb-4 flex w-fit items-center gap-2">
           <span className="flex h-10 w-10 items-center justify-center rounded-lg bg-amber-600 text-white">
             <Hammer className="h-5 w-5" />
           </span>
-          <span className="text-xl font-bold">ContractorFlow</span>
+          <span className="text-xl font-bold text-slate-900">ContractorFlow</span>
         </Link>
         <CardTitle className="text-2xl">Contractor Portal</CardTitle>
         <CardDescription>Sign in to manage leads, estimates, and your pipeline</CardDescription>
       </CardHeader>
       <CardContent>
         {!isSupabaseConfigured() && (
-          <p className="mb-4 rounded-lg bg-amber-50 px-3 py-2 text-xs text-amber-900 dark:bg-amber-900/30 dark:text-amber-200">
+          <p className="mb-4 rounded-lg border border-amber-200 bg-amber-50 px-3 py-2 text-xs text-amber-900">
             Demo mode: use <strong>{DEMO_EMAIL}</strong> / <strong>{DEMO_PASSWORD}</strong> or create
             a new account.
           </p>
         )}
 
         {error && (
-          <p className="mb-4 rounded-lg bg-red-50 px-3 py-2 text-sm text-red-700 dark:bg-red-900/30 dark:text-red-300" role="alert">
+          <p className="mb-4 rounded-lg border border-red-200 bg-red-50 px-3 py-2 text-sm text-red-700" role="alert">
             {error}
           </p>
         )}

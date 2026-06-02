@@ -38,8 +38,8 @@ export function PhotoUploader({ files, onChange }: PhotoUploaderProps) {
         className={cn(
           "flex min-h-[140px] cursor-pointer flex-col items-center justify-center rounded-xl border-2 border-dashed p-6 transition-colors",
           dragging
-            ? "border-amber-500 bg-amber-50 dark:bg-amber-900/20"
-            : "border-slate-300 bg-slate-50 dark:border-slate-700 dark:bg-slate-900/50"
+            ? "border-amber-500 bg-amber-50"
+            : "border-slate-300 bg-slate-50"
         )}
       >
         <input
@@ -52,7 +52,7 @@ export function PhotoUploader({ files, onChange }: PhotoUploaderProps) {
         />
         <label htmlFor="photo-upload" className="flex cursor-pointer flex-col items-center">
           <ImagePlus className="h-10 w-10 text-slate-400" />
-          <p className="mt-2 text-sm font-medium text-slate-700 dark:text-slate-300">
+          <p className="mt-2 text-sm font-medium text-slate-700">
             Drag & drop photos here, or click to browse
           </p>
           <p className="text-xs text-slate-500">Up to 10 images (stored in Supabase when configured)</p>

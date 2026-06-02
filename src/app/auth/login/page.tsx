@@ -20,7 +20,7 @@ function LoginContent() {
   }, [user, loading, router, returnTo]);
 
   if (loading || user) {
-    return <Skeleton className="mx-auto h-96 w-full max-w-md" />;
+    return <Skeleton className="mx-auto h-96 w-full max-w-md rounded-xl bg-white" />;
   }
 
   return <ContractorAuthForm />;
@@ -28,10 +28,9 @@ function LoginContent() {
 
 export default function LoginPage() {
   return (
-    <div className="flex min-h-screen items-center justify-center bg-gradient-to-br from-slate-900 via-slate-800 to-amber-950 px-4 py-12">
-      <div className="absolute inset-0 bg-[url('https://images.unsplash.com/photo-1504307651254-35680f356dfd?w=1600&q=80')] bg-cover bg-center opacity-15" />
-      <div className="relative w-full max-w-md">
-        <Suspense fallback={<Skeleton className="h-96 w-full" />}>
+    <div className="min-h-screen bg-slate-100 px-4 py-10 sm:py-12">
+      <div className="mx-auto w-full max-w-md">
+        <Suspense fallback={<Skeleton className="h-96 w-full rounded-xl bg-white" />}>
           <LoginContent />
         </Suspense>
       </div>

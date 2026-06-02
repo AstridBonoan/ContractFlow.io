@@ -1,17 +1,15 @@
 @import "tailwindcss";
 
-:root {
+:root,
+html,
+html.light,
+html.dark {
   --background: #f8fafc;
   --foreground: #0f172a;
   --card: #ffffff;
   --primary: #d97706;
   --primary-foreground: #ffffff;
-}
-
-.dark {
-  --background: #020617;
-  --foreground: #f1f5f9;
-  --card: #0f172a;
+  color-scheme: light only;
 }
 
 @theme inline {
@@ -21,28 +19,45 @@
   --font-mono: var(--font-geist-mono);
 }
 
+html {
+  scroll-behavior: smooth;
+  background-color: #f8fafc;
+  color: #0f172a;
+}
+
 body {
-  background: var(--background);
-  color: var(--foreground);
+  background-color: #f8fafc;
+  color: #0f172a;
   font-family: var(--font-geist-sans), system-ui, sans-serif;
 }
 
-html {
-  scroll-behavior: smooth;
+/* Force light form controls on iOS Safari */
+input,
+textarea,
+select,
+button {
   color-scheme: light;
 }
 
-/* Readable inputs on mobile (prevents OS dark-mode from hiding typed text) */
 input,
 textarea,
 select {
-  color: #0f172a;
-  background-color: #ffffff;
-  -webkit-text-fill-color: #0f172a;
+  color: #0f172a !important;
+  background-color: #ffffff !important;
+  -webkit-text-fill-color: #0f172a !important;
+  caret-color: #0f172a;
 }
 
 input::placeholder,
 textarea::placeholder {
-  color: #94a3b8;
+  color: #94a3b8 !important;
   opacity: 1;
+}
+
+input:focus,
+textarea:focus,
+select:focus {
+  background-color: #ffffff !important;
+  color: #0f172a !important;
+  -webkit-text-fill-color: #0f172a !important;
 }

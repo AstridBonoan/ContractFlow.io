@@ -34,9 +34,17 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning className="light">
+    <html lang="en" suppressHydrationWarning className="light" style={{ colorScheme: "light" }}>
+      <head>
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){var e=document.documentElement;e.classList.remove('dark');e.classList.add('light');e.style.colorScheme='light';})();`,
+          }}
+        />
+      </head>
       <body
         className={`${geistSans.variable} ${geistMono.variable} bg-slate-50 text-slate-900 antialiased`}
+        style={{ colorScheme: "light" }}
       >
         <ThemeProvider>
           <AuthProvider>

@@ -18,7 +18,14 @@ const geistMono = Geist_Mono({
 export const metadata: Metadata = {
   title: "ContractorFlow | Contractor Lead & Estimate Management",
   description:
-    "Professional platform for homeowners to request estimates and contractors to manage leads, estimates, and sales pipeline.",
+    "Professional platform for homeowners to request estimates and contractors to manage leads, estimates, and sales pipeline",
+};
+
+export const viewport = {
+  width: "device-width",
+  initialScale: 1,
+  maximumScale: 5,
+  themeColor: "#f8fafc",
 };
 
 export default function RootLayout({
@@ -27,8 +34,10 @@ export default function RootLayout({
   children: React.ReactNode;
 }>) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+    <html lang="en" suppressHydrationWarning className="light">
+      <body
+        className={`${geistSans.variable} ${geistMono.variable} bg-slate-50 text-slate-900 antialiased`}
+      >
         <ThemeProvider>
           <AuthProvider>
             <DataProvider>{children}</DataProvider>

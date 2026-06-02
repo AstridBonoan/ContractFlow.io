@@ -28,8 +28,10 @@ jobs:
           GITHUB_PAGES: "true"
           NEXT_PUBLIC_SUPABASE_URL: ${{ secrets.NEXT_PUBLIC_SUPABASE_URL }}
           NEXT_PUBLIC_SUPABASE_ANON_KEY: ${{ secrets.NEXT_PUBLIC_SUPABASE_ANON_KEY }}
-      - name: Add .nojekyll for Jekyll bypass
-        run: touch out/.nojekyll
+      - name: Add .nojekyll and build version
+        run: |
+          touch out/.nojekyll
+          echo "${{ github.sha }}" > out/build-id.txt
       - name: Deploy to gh-pages branch
         uses: peaceiris/actions-gh-pages@v4
         with:

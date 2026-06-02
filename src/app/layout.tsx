@@ -4,6 +4,7 @@ import "./globals.css";
 import { ThemeProvider } from "@/components/providers/theme-provider";
 import { DataProvider } from "@/components/providers/data-provider";
 import { AuthProvider } from "@/components/providers/auth-provider";
+import { ChunkLoadRecovery } from "@/components/chunk-load-recovery";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -36,9 +37,16 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning className="light" style={{ colorScheme: "light" }}>
       <head>
+        <meta httpEquiv="Cache-Control" content="no-cache, no-store, must-revalidate" />
+        <meta httpEquiv="Pragma" content="no-cache" />
         <script
           dangerouslySetInnerHTML={{
             __html: `(function(){var e=document.documentElement;e.classList.remove('dark');e.classList.add('light');e.style.colorScheme='light';})();`,
+          }}
+        />
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `(function(){window.addEventListener('error',function(ev){var t=ev.target;if(t&&t.tagName==='SCRIPT'&&!sessionStorage.getItem('cf-script-reload')){sessionStorage.setItem('cf-script-reload','1');location.reload();}},true);})();`,
           }}
         />
       </head>
@@ -46,6 +54,7 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} bg-slate-50 text-slate-900 antialiased`}
         style={{ colorScheme: "light" }}
       >
+        <ChunkLoadRecovery />
         <ThemeProvider>
           <AuthProvider>
             <DataProvider>{children}</DataProvider>

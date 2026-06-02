@@ -21,10 +21,10 @@ export function AuthGuard({ children }: { children: React.ReactNode }) {
 
   if (loading) {
     return (
-      <div className="flex min-h-screen items-center justify-center bg-slate-100 dark:bg-slate-950">
+      <div className="flex min-h-screen items-center justify-center bg-slate-100">
         <div className="w-full max-w-md space-y-4 p-8">
-          <Skeleton className="h-10 w-48" />
-          <Skeleton className="h-64 w-full" />
+          <Skeleton className="h-10 w-48 bg-slate-200" />
+          <Skeleton className="h-64 w-full bg-slate-200" />
         </div>
       </div>
     );
